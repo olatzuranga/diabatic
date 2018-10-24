@@ -344,6 +344,9 @@ if option == 0:
     plt.legend()
     #plt.show()
 
+
+
+    plt.figure(2)
     ll = []
     for i, lam in enumerate(data['lambda']):
         ll.append(np.array([2*lam * np.sqrt(1 - lam**2) *
@@ -352,9 +355,8 @@ if option == 0:
 
     ll = np.array(ll)
 
-    plt.figure(2)
     for i, lam in enumerate(ll):
-        plt.plot(x, lam, label='lambda {}'.format(i+1))
+        plt.plot(x, lam, label='ll {}'.format(i+1))
     # plt.plot(x, ll2, label='ll2')
     plt.xlabel('distance (A)')
     plt.ylabel('unidades')
@@ -385,7 +387,7 @@ if option == 0:
 
     print d
 
-    for label in d.keys():
+    for label in ['E_LE', 'E_CT']:
         plt.plot(x, d[label] , label=label)
     plt.xlabel('distance (A)')
     plt.ylabel('unidades')
@@ -404,13 +406,23 @@ if option == 0:
     print 2
 
     for label in d2.keys():
-        plt.plot(x, d2[label] , label=label)
+        if label.endswith('_1'):
+            plt.plot(x, d2[label] , label=label)
     plt.xlabel('distance (A)')
     plt.ylabel('unidades')
     plt.legend()
 
 
     plt.figure(6)
+    for label in d2.keys():
+        if label.endswith('_2'):
+            plt.plot(x, d2[label] , label=label)
+    plt.xlabel('distance (A)')
+    plt.ylabel('unidades')
+    plt.legend()
+
+
+    plt.figure(7)
 
     for i, _l in enumerate(l):
         e2 = np.array(_l)**2 * (np.array(d['E_CT']) - np.array(d['E_LE']) +
